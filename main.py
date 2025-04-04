@@ -18,10 +18,22 @@ def has_symbols(password):
     return any(not char.isalnum() for char in password)
 
 
-checks = [is_long, has_digit, has_upper, has_lower, has_symbols]
+def rating_password(password):
+    checks = [
+        is_long,
+        has_digit,
+        has_upper,
+        has_lower,
+        has_symbols
+    ]
+    return sum(2 for func in checks if func(password))
 
-password = input("Введите пароль: ")
 
-score = sum(2 for func in checks if func(password))
+def main():
+    password = input("Введите пароль: ")
+    score = rating_password(password)
+    print(f"Рейтинг: {score} балла")
 
-print(f"Рейтинг: {score} балла")
+
+if __name__ == "__main__":
+    main()
